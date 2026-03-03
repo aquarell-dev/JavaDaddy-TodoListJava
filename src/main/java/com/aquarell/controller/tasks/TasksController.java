@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class TasksController {
+public class TasksController implements ITaskController {
     private final ITasksService tasksService;
     private final Scanner scanner;
     private final Set<String> ALLOWED_SORT_FLAGS = Set.of("deadline", "status");
@@ -58,6 +58,7 @@ public class TasksController {
         System.out.println(String.join(";\n", tasks.stream().map(Task::toString).toList()));
     }
 
+    @Override
     public void add() {
         Task task;
 
@@ -73,12 +74,14 @@ public class TasksController {
         System.out.printf("Задача#%s добавлена.\n", task.getId().toString());
     }
 
+    @Override
     public void list() {
         System.out.println("Список задач:");
 
         listTasks(tasksService.findAll());
     }
 
+    @Override
     public void delete() {
         while (true) {
             String id = prompt("Введите UUID задачи");
@@ -92,10 +95,12 @@ public class TasksController {
         }
     }
 
+    @Override
     public void filter() {
         listTasks(tasksService.filterByStatus(parseStatus()));
     }
 
+    @Override
     public void sort() {
         String sortFlag;
 
@@ -129,6 +134,7 @@ public class TasksController {
         listTasks(tasks);
     }
 
+    @Override
     public void edit() {
         String rawId = prompt("Введите UUID");
 

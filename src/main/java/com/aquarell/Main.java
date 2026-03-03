@@ -1,5 +1,6 @@
 package com.aquarell;
 
+import com.aquarell.controller.tasks.ITaskController;
 import com.aquarell.controller.tasks.TasksController;
 import com.aquarell.entity.commands.Command;
 import com.aquarell.repository.tasks.ITasksRepository;
@@ -28,7 +29,7 @@ public class Main {
         ITasksRepository taskRepository = new TasksRepository();
         ITasksService taskService = new TasksService(taskRepository);
 
-        var controller = new TasksController(taskService);
+        ITaskController controller = new TasksController(taskService);
 
         Map<Command, Runnable> LOOKUP = Map.of(
                 Command.ADD, controller::add,

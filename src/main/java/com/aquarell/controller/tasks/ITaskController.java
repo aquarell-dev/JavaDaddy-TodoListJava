@@ -1,10 +1,15 @@
 package com.aquarell.controller.tasks;
 
-import com.aquarell.service.tasks.ITasksService;
-
-import java.util.Map;
-import java.util.function.Supplier;
-
 public interface ITaskController {
+    public void add();
 
+    public void list();
+
+    public void edit();
+
+    public void sort();
+
+    public void filter();
+
+    public void delete();
 }
